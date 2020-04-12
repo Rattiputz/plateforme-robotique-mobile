@@ -1,7 +1,8 @@
-Installation de ROS --------------------------------------------
+Préliminaires --------------------------------------------
 
 Drivers Nvidia:
-Avant tout, tester si le pc s'éteint correctement. Si non, installer les drivers nvidia via:
+Avant tout, tester si le pc s'éteint correctement. Si non, installer les drivers nvidia avec:
+
 sudo apt-get install nvidia-384
 ou
 sudo apt-get install nvidia-430
@@ -9,67 +10,109 @@ sudo apt-get install nvidia-430
 Tutorial GitHub:
 https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
 
+Installation de ROS --------------------------------------------
+
 ROS control:
 http://gazebosim.org/tutorials/?tut=ros_control
 
-ROS Ubuntu+Raspberry
+ROS communication avec Ubuntu+Raspberry:
 https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
 
 ROS:
 http://wiki.ros.org/kinetic/Installation/Ubuntu (installer ros-kinetic-ros-base)
 
+1. Ici on n'installe que ROS base. Par la suite, nous installerons gazebo9 (alors que la version par défaut est gazebo7). Nous installerons les autres packages nécessaires manuellement.
+2. Vérifier que ROS est bien installé (passer à la suite après l'actualisation de rosdep).
+
 Gazebo9 (seulement sur ordinateur?):
 https://medium.com/@abhiksingla10/setting-up-ros-kinetic-and-gazebo-8-or-9-70f2231af21a
 http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install
 
-Erreur avec rviz: installer
-sudo apt-get install ros-kinetic-joint-state-publisher ros-kinetic-joint-state-publisher-gui ros-kinetic-robot-state-publisher
+1. Suivre les instructions manuelles du deuxième lien pour récupérer les repos des versions de gazebo adaptées à ROS kinetic (ne pas installer gazebo pour l'instant).
+2. Reprendre le premier lien à l'installation de gazebo9. S'assurer que les packages sont bien présents auparavent.
 
-Erreur Gmapping: installer
-sudo apt-get install ros-kinetic-gmapping
+En plus des packages cités, installer:
 
-Erreur teleop: installer
-sudo apt-get install ros-kinetic-turtlebot
+1. sudo apt-get install ros-kinetic-joint-state-publisher ros-kinetic-joint-state-publisher-gui ros-kinetic-robot-state-publisher (bon lancement de rviz)
+2. sudo apt-get install ros-kinetic-gmapping (gmapping)
+3. sudo apt-get install ros-kinetic-turtlebot (diriger le robot au clavier)
+4. sudo apt-get install ros-kinetic-map-server ros-kinetic-amcl ros-kinetic-move-base (permettre la navigation autonome)
 
-Transfert Ubuntu
+Installation de Ubuntu Mate 16.04 sur Raspberry Pi 4 --------------------------------------------
+
+Ubuntu 16.04 Mate sur Raspberry Pi 4:
+
 https://ubuntu-mate.community/t/is-there-a-ubuntu-mate-for-raspberry-pi-4/19943/4
 
-Puis changer cmdline.txt (dans /boot) en
-dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+0. S'il y a des problèmes pour connecter la carte SD à l'ordinateur, la commande suivante devrait résoudre le problème (il faut malheureusement redémarrer le PC à chaque fois):
 
-PARTUUID (pas nécessaire/possible?)
-(https://www.raspberrypi.org/forums/viewtopic.php?t=105868
-https://raspberrypi.stackexchange.com/questions/75027/whats-the-difference-between-uuid-and-partuuid)
-
-Connecter carte SD
 sudo apt-get install --reinstall udisks2
 sudo reboot
 
-Connection USB (problème de câble)
-(https://www.raspberrypi.org/forums/viewtopic.php?t=160400
-http://pci-ids.ucw.cz/
-https://www.raspberrypi.org/forums/viewtopic.php?t=168559)
+1. Ce procédé est plus simple avec 2 cartes SD, mais une suffit (effectuer d'abord l'étape 2.). Sur une première carte SD, flasher Ubuntu 16.04 Mate (armhf) de manière native (Ubuntu) ou avec un outil dédié (Windows, type BalenaEtcher). Pour télécharger Ubuntu:
 
-Plusieurs terminaux:
-https://askubuntu.com/questions/332104/open-another-terminal-window-with-the-same-ssh-session-as-original-window
+wget https://ubuntu-mate.org/raspberry-pi/ubuntu-mate-16.04.2-desktop-armhf-raspberry-pi.img.xz
 
-SSH:
+2. Sur une deuxième carte SD, flasher Raspian Buster:
+
+https://www.raspberrypi.org/downloads/raspbian/
+
+3. Enregistrer /boot et /rootfs/lib/modules de l'image Raspian. Supprimer le boot de la carte avec Ubuntu et remplacer par le /boot enregistré. Remplacer /rootfs/lib/modules de Ubuntu par le dossier /modules enregistré.
+
+4. Changer cmdline.txt (dans /boot) en:
+
+dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+
+Normalement il faudrait changer le PARTUUID (ou le UUID) dans cette ligne de commande. Puisqu'il est apparement difficile de le trouver sur le système modifié (il ne démarre pas avant d'avoir renseigné le UUID), cette solution est plus simple: on renseigne au /boot que la prochaine partition sur la carte SD est /root. Le système devrait maintenant pouvoir démarrer sur la Raspberry Pi 4.
+
+5. Pour s'assurer que la Raspberry Pi 4 démarre bien, nous allons mettre en place le SSH:
+
 https://www.youtube.com/watch?v=8qleH35Kgjk
-
 https://thepihut.com/blogs/raspberry-pi-tutorials/19668676-renaming-your-raspberry-pi-the-hostname
-etape 1: modification réseau -> nouvelle connection -> vers ordinateur (IPv4) et ignorer (IPv6)
-etape 2: hostname -I, puis avec l'ip trouvée faire sudo nmap -sP -PI -PT *IP*/24
-etape 3: faire sudo nano /media/magnus/PI_ROOT/etc/hostname et noter le nom
-etape 4: sudo ssh prmraspi@*IP trouvée avec nmap* et entrer le MdP (ici sudo ssh -X prmraspi@10.42.0.201)
-etape 5: gnome-terminal & pour avoir plusieurs terminaux
+
+etape 1: insérer un fichier text brut vide nommé "ssh" sur PI_BOOT (attention à ne pas lui donner d'extension comme .txt. Il est possible de vérifier dans propriétés que le fichier n'a pas d'extension).
+
+etape 2: dans l'onglet réseau sur l'ordinateur, cliquer Modification des connections... -> Ajouter -> Ethernet, puis dans les paramètres IPv4 sélectionner "Partagé avec d'autres ordinateurs". Dans les paramètres IPv6, sélectionner "Ignorer".
+
+etape 3: connecter la Raspberry Pi par ethernet et sélectionner la connection créée à l'étape 2 (il est judicieux de la nommer afin de la retrouver facilement). Utiliser:
+
+hostname -I
+
+pour trouver l'IP de l'ordinateur, puis avec l'ip trouvée faire:
+
+sudo nmap -sP -PI -PT *IP*/24
+
+etape 4: faire:
+
+sudo nano /media/magnus/PI_ROOT/etc/hostname
+
+et noter le nom de la Raspberry.
+
+etape 5: faire:
+
+sudo ssh prmraspi@*IP trouvée avec nmap* (ici, sudo ssh -X prmraspi@10.42.0.201)
+
+et entrer le mot de passe par défaut (raspberry).
+
+etape 6: faire:
+
+gnome-terminal &
+
+pour avoir plusieurs terminaux sur cette même connection SSH (https://askubuntu.com/questions/332104/open-another-terminal-window-with-the-same-ssh-session-as-original-window). ctrl+maj+t permet d'ouvrir un nouvel onglet.
+
+6. Modifier le mot de passe de la Raspberry:
+
+sudo raspi-config -> Change User Password
+
+Étant donné la faible sécurité du réseau de l'école, il est mandatoire de changer le mot de passe pour éviter de donner l'accès root à un inconnu une fois connecté sur le réseau de l'école.
+
+Mise en oeuvre --------------------------------------------
 
 Firmware lidar (Rpi):
 Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche...
 
 Exemple connection ROS:
 https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
-
-Mise en oeuvre --------------------------------------------
 
 Tutoriel complet:
 https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/robot-creation-first-ros-robot/

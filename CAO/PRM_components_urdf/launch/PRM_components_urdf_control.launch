@@ -1,7 +1,0 @@
-<launch>
-  <rosparam command="load" file="$(find fusion2urdf)/launch/PRM_components_urdf_controller.yaml"/>
-  <node args="caster_position_controller rev_left_position_controller rev_right_position_controller rigid_plaque_inf_position_controller rigid_plaque_sup_position_controller rplidar_joint_position_controller tilt_joint_position_controller rigid_camera_position_controller pan_joint_position_controller joint_state_controller" name="controller_spawner" ns="PRM_components_urdf" output="screen" pkg="controller_manager" respawn="false" type="spawner"/>
-  <node name="robot_state_publisher" output="screen" pkg="robot_state_publisher" respawn="false" type="robot_state_publisher">
-    <remap from="/joint_states" to="/PRM_components_urdf/joint_states"/>
-  </node>
-</launch>

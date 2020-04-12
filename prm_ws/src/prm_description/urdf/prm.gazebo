@@ -35,8 +35,8 @@
       <legacyMode>false</legacyMode>
       <alwaysOn>true</alwaysOn>
       <updateRate>20</updateRate>
-      <leftJoint>Rev121</leftJoint>
-      <rightJoint>Rev120</rightJoint>
+      <leftJoint>rev_left</leftJoint>
+      <rightJoint>rev_right</rightJoint>
       <torque>0.078</torque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
@@ -45,16 +45,15 @@
     </plugin>
   </gazebo>
 
-
   <gazebo reference="base_link">
     <material>Gazebo/Black</material>
   </gazebo>
 
-  <gazebo reference="laser">
+  <gazebo reference="laser_1">
     <material>Gazebo/White</material>
   </gazebo>
 
-  <gazebo reference="Left_Wheel_1">
+  <gazebo reference="left_wheel_1">
     <material>Gazebo/Blue</material>
      <mu1 value="1.0" />
       <mu2 value="1.0" />
@@ -64,7 +63,7 @@
       <minDepth value="0.0001" />
   </gazebo>
 
-  <gazebo reference="Right_Wheel_3">
+  <gazebo reference="right_wheel_3">
     <material>Gazebo/Blue</material>
      <mu1 value="1.0" />
       <mu2 value="1.0" />
@@ -76,7 +75,7 @@
 
   
 
-<gazebo reference="laser">
+<gazebo reference="laser_1">
     <sensor type="gpu_ray" name="head_rplidar_sensor">
       <pose>0 0 0.06 0 0 0</pose>
       <visualize>false</visualize>
@@ -103,12 +102,12 @@
       </ray>
       <plugin name="gazebo_ros_head_rplidar_controller" filename="libgazebo_ros_gpu_laser.so">
         <topicName>scan</topicName>
-        <frameName>laser</frameName>
+        <frameName>laser_1</frameName>
       </plugin>
     </sensor>
   </gazebo>
 
- <gazebo reference="camera">
+ <gazebo reference="camera_1">
     <material>Gazebo/Green</material>
     <sensor type="camera" name="rpicam">
       <update_rate>30.0</update_rate>
@@ -130,7 +129,7 @@
         <cameraName>prm/rpicam</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera</frameName>
+        <frameName>camera_1</frameName>
         <hackBaseline>0.07</hackBaseline>
         <distortionK1>0.0</distortionK1>
         <distortionK2>0.0</distortionK2>

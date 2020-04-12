@@ -19,7 +19,7 @@
   </include>
 
   
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find prm_description)/urdf/prm.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro.py --inorder '$(find prm_description)/urdf/prm.xacro'"/> <!-- inorder est peut etre necessaire en vue du format de prm.xacro-->
 
   <node name="prm_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
    args="-urdf -param robot_description -model prm" />
