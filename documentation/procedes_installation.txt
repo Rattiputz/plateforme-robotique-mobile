@@ -10,7 +10,7 @@ sudo apt-get install nvidia-430
 Tutorial GitHub:
 https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
 
-Installation de ROS --------------------------------------------
+Installation de ROS sur ordinateur --------------------------------------------
 
 ROS control:
 http://gazebosim.org/tutorials/?tut=ros_control
@@ -24,7 +24,7 @@ http://wiki.ros.org/kinetic/Installation/Ubuntu (installer ros-kinetic-ros-base)
 1. Ici on n'installe que ROS base. Par la suite, nous installerons gazebo9 (alors que la version par défaut est gazebo7). Nous installerons les autres packages nécessaires manuellement.
 2. Vérifier que ROS est bien installé (passer à la suite après l'actualisation de rosdep).
 
-Gazebo9 (seulement sur ordinateur?):
+Gazebo9 (seulement sur ordinateur):
 https://medium.com/@abhiksingla10/setting-up-ros-kinetic-and-gazebo-8-or-9-70f2231af21a
 http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install
 
@@ -106,13 +106,68 @@ sudo raspi-config -> Change User Password
 
 Étant donné la faible sécurité du réseau de l'école, il est mandatoire de changer le mot de passe pour éviter de donner l'accès root à un inconnu une fois connecté sur le réseau de l'école.
 
+Installation de ROS sur Raspberry Pi --------------------------------------------
+
+Même installation que sur pc en passant l'installation de gazebo9 (non nécessaire sur la Raspberry). Il faut cette fois installer
+
+ros-kinetic-desktop-full
+
+en s'assurant que les packages précisés ci-dessus sont bien installés.
+
 Mise en oeuvre --------------------------------------------
 
-Firmware lidar (Rpi):
-Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche...
-
-Exemple connection ROS:
+Lien entre Raspberry et PC:
 https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
+
+1. Faire ifconfig sur PC et Raspberry et récupérer les adresses IP. Ensuite, faire:
+
+sudo nano /etc/hosts
+
+et ajouter:
+
+10.42.0.1       pc-ros
+10.42.0.201     raspberry-1
+
+sur PC et Raspberry (en substituant les adresses IP correctes).
+
+2. Sur le PC (qui sera maître):
+
+echo 'export ROS_HOSTNAME=pc-ros' >> ~/.bashrc
+echo 'export ROS_MASTER_URI=http://pc-ros:11311' >> ~/.bashrc
+
+3. Sur la Raspberry (qui sera esclave):
+
+echo 'export ROS_HOSTNAME=raspberry-1' >> ~/.bashrc
+echo 'export ROS_MASTER_URI=http://pc-ros:11311' >> ~/.bashrc
+
+4. Tester la connection en faisant:
+
+ping pc-ros (respectivement ping raspberry-1)
+
+Ensuite, sur l'ordinateur lancer:
+
+roscore
+
+puis:
+
+rostopic pub /test std_msgs/Float32 5.0
+
+et sur la Raspberry:
+
+rostopic echo /test
+
+Normallement la Raspberry devrait afficher la valeur 5.0.
+
+
+
+
+
+
+
+Firmware lidar (Rpi):
+Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche... (https://github.com/robopeak/rplidar_ros)
+
+
 
 Tutoriel complet:
 https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/robot-creation-first-ros-robot/

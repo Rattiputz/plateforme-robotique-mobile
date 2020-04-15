@@ -1,3 +1,6 @@
+0. Wiki sur les plugins: http://gazebosim.org/tutorials?tut=ros_gzplugins
+https://github.com/ros-simulation/gazebo_ros_pkgs
+
 1. Utiliser fusion2urdf sur UNE COPIE (dans notre cas PRM_components_urdf) de PRM_components (ouvert dans Fusion 360). ATTENTION: avant d'utiliser fusion2urdf, changer les unités en millimètres.
 
 2. Copier le dossier généré (ici /PRM_components_urdf_description)
