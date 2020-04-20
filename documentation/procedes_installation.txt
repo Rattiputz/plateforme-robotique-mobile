@@ -21,14 +21,19 @@ https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry
 ROS:
 http://wiki.ros.org/kinetic/Installation/Ubuntu (installer ros-kinetic-ros-base)
 
-1. Ici on n'installe que ROS base. Par la suite, nous installerons gazebo9 (alors que la version par défaut est gazebo7). Nous installerons les autres packages nécessaires manuellement.
-2. Vérifier que ROS est bien installé (passer à la suite après l'actualisation de rosdep).
+1. Ici on n'installe que ROS base (sudo apt-get install ros-kinetic-ros-base). Par la suite, nous installerons gazebo9 (alors que la version par défaut est gazebo7). Nous installerons les autres packages nécessaires manuellement.
+
+2. Vérifier que ROS est bien installé avec:
+
+roscore
+
+(passer à la suite après l'actualisation de rosdep).
 
 Gazebo9 (seulement sur ordinateur):
 https://medium.com/@abhiksingla10/setting-up-ros-kinetic-and-gazebo-8-or-9-70f2231af21a
 http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install
 
-1. Suivre les instructions manuelles du deuxième lien pour récupérer les repos des versions de gazebo adaptées à ROS kinetic (ne pas installer gazebo pour l'instant).
+1. Suivre les instructions manuelles du deuxième lien pour récupérer les repos des versions de gazebo adaptées à ROS kinetic (ne pas installer gazebo-11).
 2. Reprendre le premier lien à l'installation de gazebo9. S'assurer que les packages sont bien présents auparavent.
 
 En plus des packages cités, installer:
@@ -156,9 +161,30 @@ et sur la Raspberry:
 
 rostopic echo /test
 
-Normallement la Raspberry devrait afficher la valeur 5.0.
+Normallement la Raspberry devrait afficher la valeur 5.0. Les deux ordinateurs sont maintenant connectés. Comme cette modification est permanente, il suffit d'utiliser le ssh pour avoir accès à la Raspberry.
 
+Remarque: pour utiliser ros sur un ordinateur sans connexion au robot, il faut commenter les lignes:
 
+export ROS_HOSTNAME=pc-ros
+export ROS_MASTER_URI=http://pc-ros:11311
+
+de .bashrc .
+
+Changer de nom d'un package:
+https://answers.ros.org/question/28165/renaming-a-package/
+
+1. Changer le nom du dossier, le nom du projet (CMakeList.txt) et le nom du package (package.xml).
+2. Lancer:
+
+catkin_make
+
+dans le workspace.
+
+3. Faire:
+
+rospack profile
+
+pour que Ros trouve les changements.
 
 
 
@@ -171,6 +197,8 @@ Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marc
 
 Tutoriel complet:
 https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/robot-creation-first-ros-robot/
+
+
 
 Contrôleurs (utilisation du joint_position_controller pour la tourelle caméra):
 http://wiki.ros.org/ros_control
