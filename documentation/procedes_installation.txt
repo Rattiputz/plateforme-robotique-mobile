@@ -186,19 +186,21 @@ rospack profile
 
 pour que Ros trouve les changements.
 
+Lancer le lidar sur Raspberry: ne pas oublier:
 
+sudo chmod 666 /dev/ttyUSB0
 
 
 
 Firmware lidar (Rpi):
 Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche... (https://github.com/robopeak/rplidar_ros)
 
+Orientation camera??? https://answers.gazebosim.org//question/4266/gazebo-15-libgazebo_openni_kinectso-pointcloud-data-is-rotated-and-flipped/
 
+tmp: https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax (syntaxe sur github)
 
-Tutoriel complet:
-https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/robot-creation-first-ros-robot/
-
-
+Bonnes pratiques pour la gestion de pacakges:
+https://answers.ros.org/question/12932/best-practice-urdf-descriptions-real-robots-gazebo-plugins-and-dependencies/
 
 Contrôleurs (utilisation du joint_position_controller pour la tourelle caméra):
 http://wiki.ros.org/ros_control
