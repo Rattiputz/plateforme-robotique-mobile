@@ -5,6 +5,7 @@
   
   <xacro:property name="cameraSize" value="0.05"/>
   <xacro:property name="cameraMass" value="0.00109"/>
+
   <xacro:include filename="$(find prm_description)/urdf/prm.gazebo" />
   <xacro:include filename="$(find prm_description)/urdf/materials.xacro" />
   <xacro:include filename="$(find prm_description)/urdf/macros.xacro" />
@@ -135,12 +136,14 @@
     <mass value="0.055725588971055603"/>
     <inertia ixx="3e-05" ixy="0.0" ixz="-0.0" iyy="1.9e-05" iyz="0.0" izz="1.9e-05"/>
   </inertial>
+
   <visual>
     <origin rpy="0 0 0" xyz="0.139 -0.002194 -0.032408"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/right_wheel_3.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
+
   <collision>
     <origin rpy="0 0 0" xyz="0.139 -0.002194 -0.032408"/>
     <geometry>
@@ -189,12 +192,14 @@
     <mass value="0.09905330487184344"/>
     <inertia ixx="0.000271" ixy="-0.0" ixz="-0.0" iyy="0.000189" iyz="0.0" izz="0.000459"/>
   </inertial>
+
   <visual>
     <origin rpy="0 0 0" xyz="0.044 -0.008694 -0.111408"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
+
   <collision>
     <origin rpy="0 0 0" xyz="0.044 -0.008694 -0.111408"/>
     <geometry>
@@ -211,12 +216,14 @@
     <mass value="0.07305683031313406"/>
     <inertia ixx="6.2e-05" ixy="1e-06" ixz="0.0" iyy="3.2e-05" iyz="-7e-06" izz="7.2e-05"/>
   </inertial>
+
   <visual>
     <origin rpy="0 0 0" xyz="0.112 -0.130239 -0.112908"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
+
   <collision>
     <origin rpy="0 0 0" xyz="0.112 -0.130239 -0.112908"/>
     <geometry>
@@ -233,12 +240,14 @@
     <mass value="0.0837710951291597"/>
     <inertia ixx="9e-06" ixy="-0.0" ixz="-0.0" iyy="1.2e-05" iyz="1e-06" izz="9e-06"/>
   </inertial>
+
   <visual>
     <origin rpy="0 0 0" xyz="0.093603 0.066257 -0.082423"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/tilt_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
+
   <collision>
     <origin rpy="0 0 0" xyz="0.093603 0.066257 -0.082423"/>
     <geometry>
@@ -255,18 +264,30 @@
     <mass value="0.0010901216866178827"/>
     <inertia ixx="1.0e-03" ixy="0.0" ixz="-0.0" iyy="1.0e-03" iyz="-0.0" izz="1.0e-03"/> <!--Inertie modifiee (nulle a la base), a ajuster (trop haute pour l'instant)-->
   </inertial>
+
   <visual>
     <origin rpy="0 0 0" xyz="0.081607 0.087487 -0.094501"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
+
   <collision>
     <origin rpy="0 0 0" xyz="0.081607 0.087487 -0.094501"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
+</link>
+
+<!--Ajout d'un repere supplementaire pour assurer une orientation correcte de la camera-->
+<joint name="camera_optical_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
+  <parent link="camera_1"/>
+  <child link="camera_rgb_frame"/>
+</joint>
+
+<link name="camera_rgb_frame">
 </link>
 
 <!--Tourelle Camera - Rotation z - Pan-->
@@ -277,12 +298,14 @@
     <mass value="0.10221097927434729"/>
     <inertia ixx="1.7e-05" ixy="-0.0" ixz="0.0" iyy="1.4e-05" iyz="3e-06" izz="1.9e-05"/>
   </inertial>
+
   <visual>
     <origin rpy="0 0 0" xyz="0.084018 0.039106 -0.051732"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/pan_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
+
   <collision>
     <origin rpy="0 0 0" xyz="0.084018 0.039106 -0.051732"/>
     <geometry>
@@ -352,8 +375,9 @@
 <!--Joint RPLidar-->
 
 <joint name="rplidar_joint" type="fixed">
-  <origin rpy="0 0 0" xyz="-0.068 0.121545 0.0015"/>
-  <parent link="plaque_sup_1"/>
+	<axis xyz="0 1 0"/>
+  <origin rpy="0 0 0" xyz="-0.068 0.121545 0.0015"/>  <!--origin rpy="0 0 0" xyz="-0.068 0.121545 0.0015"/--> 
+  <parent link="plaque_sup_1"/> <!--plaque_sup_1--> 
   <child link="laser_1"/>
 </joint>
 
@@ -382,7 +406,7 @@
 <!--Joint Camera-->
 
 <joint name="rigid_camera" type="fixed">
-  <origin rpy="0 0 -1.57" xyz="0.011996 -0.02123 0.012078"/> <!--rpy="0 0 -1.57" ajuste l'orientation de la camera-->
+  <origin rpy="0 0 0" xyz="0.011996 -0.02123 0.012078"/> <!--rpy="0 0 -1.57" ajuste l'orientation de la camera-->
   <parent link="tilt_1"/>
   <child link="camera_1"/>
 </joint>

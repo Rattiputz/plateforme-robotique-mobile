@@ -106,6 +106,17 @@ et
   <axis xyz="1 0 0"/>
 </joint>
 
+La caméra ne regarde pas dans la bonne direction, il faut ajouter les lignes suivantes pour un repère supplémentaire qui corrige cela:
+
+<joint name="camera_optical_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
+  <parent link="camera_1"/>
+  <child link="camera_rgb_frame"/>
+</joint>
+
+<link name="camera_rgb_frame">
+</link>
+
 Dernièrement, la caméra est générée sans inertie, il faut lui en donner une pour que le modèle soit stable:
 
 <link name="camera_1">

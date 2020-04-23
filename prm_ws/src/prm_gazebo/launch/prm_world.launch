@@ -19,9 +19,12 @@
   </include>
 
   
-  <param name="robot_description" command="$(find xacro)/xacro.py --inorder '$(find prm_description)/urdf/prm.xacro'"/> <!-- inorder est peut etre necessaire en vue du format de prm.xacro-->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find prm_description)/urdf/prm.xacro'"/><!--Cherche le modele urdf du robot-->
 
   <node name="prm_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
    args="-urdf -param robot_description -model prm" />
+
+	<!--node pkg="tf" type="static_transform_publisher" name="camera_tf" args="0 0 0 -1.57 0 0 plaque_sup_1 laser_1 100"/-->
+	<!--node pkg="tf" type="static_transform_publisher" name="camera_tf" args="0 0 0 -1.57 0 0 odom base_link 100"/-->
 
 </launch>

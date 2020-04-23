@@ -192,14 +192,28 @@ sudo chmod 666 /dev/ttyUSB0
 
 
 
+
+
+
+
 Firmware lidar (Rpi):
 Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche... (https://github.com/robopeak/rplidar_ros)
 
-Orientation camera??? https://answers.gazebosim.org//question/4266/gazebo-15-libgazebo_openni_kinectso-pointcloud-data-is-rotated-and-flipped/
+Comprendre tf:
+https://www.youtube.com/watch?v=dBATvRhvGRI
+https://linklab-uva.github.io/autonomousracing/assets/files/L11-compressed.pdf
 
-tmp: https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax (syntaxe sur github)
+Comprendre RPlidar et Hector SLAM:
+https://www.youtube.com/watch?v=Qrtz0a7HaQ4
 
-Bonnes pratiques pour la gestion de pacakges:
+Conversion de laser scan en pointcloud:
+https://answers.ros.org/question/11232/how-to-turn-laser-scan-to-point-cloud-map/
+http://wiki.ros.org/laser_geometry
+
+Mise en page wiki github:
+https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax (syntaxe sur github)
+
+Bonnes pratiques pour la gestion de packages:
 https://answers.ros.org/question/12932/best-practice-urdf-descriptions-real-robots-gazebo-plugins-and-dependencies/
 
 Contrôleurs (utilisation du joint_position_controller pour la tourelle caméra):
