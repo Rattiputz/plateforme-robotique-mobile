@@ -107,7 +107,7 @@
     </sensor>
   </gazebo>
 
- <gazebo reference="camera_rgb_frame">
+ <gazebo reference="camera_1">
     <material>Gazebo/Green</material>
     <sensor type="camera" name="rpicam">
       <update_rate>30.0</update_rate>
@@ -129,7 +129,7 @@
         <cameraName>prm/rpicam</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera_rgb_frame</frameName>
+        <frameName>camera_1</frameName>
         <hackBaseline>0.07</hackBaseline>
         <distortionK1>0.0</distortionK1>
         <distortionK2>0.0</distortionK2>
