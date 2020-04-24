@@ -1,0 +1,277 @@
+<?xml version="1.0" ?>
+<robot name="PRM_components_urdf" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find PRM_components_urdf_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find PRM_components_urdf_description)/urdf/PRM_components_urdf.trans" />
+<xacro:include filename="$(find PRM_components_urdf_description)/urdf/PRM_components_urdf.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.05310169706081706 0.0034414832617332054 0.032112026005096383"/>
+    <mass value="0.27584583240478544"/>
+    <inertia ixx="0.000392" ixy="1e-06" ixz="-1.1e-05" iyy="0.001046" iyz="-0.0" izz="0.001324"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bille_porteuse_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="1.9898465511425378e-07 2.0107467493986342e-07 -5.026749273773223e-09"/>
+    <mass value="0.008419367021437509"/>
+    <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="-0.0" izz="0.0"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.146845 -0.003419 -0.005278"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/bille_porteuse_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.146845 -0.003419 -0.005278"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/bille_porteuse_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-5.508030874472672e-06 0.01684892913146528 7.513062201813803e-06"/>
+    <mass value="0.05572555972770472"/>
+    <inertia ixx="1.9e-05" ixy="0.0" ixz="0.0" iyy="3e-05" iyz="-0.0" izz="1.9e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.010889 -0.058419 -0.032408"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.010889 -0.058419 -0.032408"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_3">
+  <inertial>
+    <origin rpy="0 0 0" xyz="6.825622156370059e-06 -0.0168397715083117 5.53835148414672e-06"/>
+    <mass value="0.055725588971055603"/>
+    <inertia ixx="1.9e-05" ixy="-0.0" ixz="-0.0" iyy="3e-05" iyz="-0.0" izz="1.9e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.010889 0.051581 -0.032408"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/right_wheel_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.010889 0.051581 -0.032408"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/right_wheel_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lien_plaque_sup_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.06000033725581454 -0.03999979892532527 0.030000328306584424"/>
+    <mass value="0.016233798346575297"/>
+    <inertia ixx="3.1e-05" ixy="0.0" ixz="0.0" iyy="6.3e-05" iyz="0.0" izz="8.4e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.017389 -0.043419 -0.051408"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/lien_plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.017389 -0.043419 -0.051408"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/lien_plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="plaque_sup_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.06078580998917531 -0.03999979892532401 0.0007503283065849048"/>
+    <mass value="0.09905330487184344"/>
+    <inertia ixx="0.000189" ixy="0.0" ixz="0.0" iyy="0.000271" iyz="-0.0" izz="0.000459"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.017389 -0.043419 -0.111408"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.017389 -0.043419 -0.111408"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="laser_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.040061307840170784 0.027457336130652665 0.0247276910229174"/>
+    <mass value="0.07305683031313406"/>
+    <inertia ixx="3.2e-05" ixy="-1e-06" ixz="7e-06" iyy="6.2e-05" iyz="0.0" izz="7.2e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.138934 0.024581 -0.112908"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.138934 0.024581 -0.112908"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="tilt_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.003738616936006807 0.012530651696176127 0.008107618754683021"/>
+    <mass value="0.0837710951291597"/>
+    <inertia ixx="1.2e-05" ixy="0.0" ixz="-1e-06" iyy="9e-06" iyz="-0.0" izz="9e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.057561 0.006184 -0.082423"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/tilt_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.057561 0.006184 -0.082423"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/tilt_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0006061219360854186 -0.0027796194139754413 3.853172479532929e-05"/>
+    <mass value="0.0010901216866178827"/>
+    <inertia ixx="0.0" ixy="-0.0" ixz="0.0" iyy="0.0" iyz="-0.0" izz="0.0"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.078792 -0.005812 -0.094501"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.078792 -0.005812 -0.094501"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="pan_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.006970821823375661 -0.000197811890040082 0.01387484558911331"/>
+    <mass value="0.10221097927434729"/>
+    <inertia ixx="1.4e-05" ixy="0.0" ixz="-3e-06" iyy="1.7e-05" iyz="0.0" izz="1.9e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.030411 -0.003402 -0.051732"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/pan_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.030411 -0.003402 -0.051732"/>
+    <geometry>
+      <mesh filename="package://PRM_components_urdf_description/meshes/pan_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="caster" type="Ball">
+  <origin rpy="0 0 0" xyz="-0.146845 0.003419 0.005278"/>
+  <parent link="base_link"/>
+  <child link="bille_porteuse_1"/>
+</joint>
+
+<joint name="rev_left" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.010889 0.058419 0.032408"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 0.01 -0.0"/>
+</joint>
+
+<joint name="rev_right" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.010889 -0.051581 0.032408"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_3"/>
+  <axis xyz="-0.0 -0.01 0.0"/>
+</joint>
+
+<joint name="rigid_plaque_inf" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.017389 0.043419 0.051408"/>
+  <parent link="base_link"/>
+  <child link="lien_plaque_sup_1"/>
+</joint>
+
+<joint name="rigid_plaque_sup" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.06"/>
+  <parent link="lien_plaque_sup_1"/>
+  <child link="plaque_sup_1"/>
+</joint>
+
+<joint name="rplidar_joint" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.121545 -0.068 0.0015"/>
+  <parent link="plaque_sup_1"/>
+  <child link="laser_1"/>
+</joint>
+
+<joint name="tilt_joint" type="revolute">
+  <origin rpy="0 0 0" xyz="0.02715 -0.009586 0.030691"/>
+  <parent link="pan_1"/>
+  <child link="tilt_1"/>
+  <axis xyz="5.3e-05 -0.01 -9e-06"/>
+  <limit effort="100" lower="-1.434661" upper="1.434661" velocity="100"/>
+</joint>
+
+<joint name="rigid_camera" type="fixed">
+  <origin rpy="0 0 0" xyz="0.021231 0.011996 0.012078"/>
+  <parent link="tilt_1"/>
+  <child link="camera_1"/>
+</joint>
+
+<joint name="pan_joint" type="revolute">
+  <origin rpy="0 0 0" xyz="0.030411 0.003402 0.051732"/>
+  <parent link="base_link"/>
+  <child link="pan_1"/>
+  <axis xyz="0.0 9e-06 -0.01"/>
+  <limit effort="100" lower="-1.570796" upper="1.570796" velocity="100"/>
+</joint>
+
+</robot>
