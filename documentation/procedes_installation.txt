@@ -210,6 +210,9 @@ Conversion de laser scan en pointcloud:
 https://answers.ros.org/question/11232/how-to-turn-laser-scan-to-point-cloud-map/
 http://wiki.ros.org/laser_geometry
 
+ROS SLAM navigation stack:
+https://www.generationrobots.com/blog/en/lidar-integration-with-ros-quickstart-guide-and-projects-ideas/
+
 Mise en page wiki github:
 https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax (syntaxe sur github)
 
@@ -220,3 +223,6 @@ Contrôleurs (utilisation du joint_position_controller pour la tourelle caméra)
 http://wiki.ros.org/ros_control
 http://gazebosim.org/tutorials/?tut=ros_control
 https://www.theconstructsim.com/ros-qa-070-moving-joints-gazebo-simple-example/
+
+Haute utilisation du CPU Raspberry:
+https://askubuntu.com/questions/798989/heavy-load-by-apt-unattended-upgrade

@@ -117,6 +117,18 @@ La caméra ne regarde pas dans la bonne direction, il faut ajouter les lignes su
 <link name="camera_rgb_frame">
 </link>
 
+De même, faire la modification suivante pour le lidar:
+
+<!--Ajout d'un repere supplementaire pour assurer une orientation correcte du lidar-->
+<joint name="laser_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
+  <parent link="laser_1"/>
+  <child link="laser_frame"/>
+</joint>
+
+<link name="laser_frame">
+</link>
+
 Dernièrement, la caméra est générée sans inertie, il faut lui en donner une pour que le modèle soit stable:
 
 <link name="camera_1">

@@ -75,11 +75,11 @@
 
   
 
-<gazebo reference="laser_1">
+<gazebo reference="laser_frame">
     <sensor type="gpu_ray" name="head_rplidar_sensor">
-      <pose>0 0 0.06 0 0 0</pose> <!--0 0 0.06 0 0 0-->
+      <pose>0 0 0.06 0 0 0</pose>
       <visualize>false</visualize>
-      <update_rate>40</update_rate>
+      <update_rate>60</update_rate>
       <ray>
         <scan>
           <horizontal>
@@ -91,7 +91,7 @@
         </scan>
         <range>
           <min>0.2</min>
-          <max>30.0</max>
+          <max>12.0</max>
           <resolution>0.01</resolution>
         </range>
         <noise>
@@ -100,10 +100,10 @@
           <stddev>0.01</stddev>
         </noise>
       </ray>
-      <!--plugin name="gazebo_ros_head_rplidar_controller" filename="libgazebo_ros_gpu_laser.so">
+      <plugin name="gazebo_ros_head_rplidar_controller" filename="libgazebo_ros_gpu_laser.so">
         <topicName>scan</topicName>
-        <frameName>laser_1</frameName>
-      </plugin--><!--Commenter pour permettre au lidar du robot de publier ses donnees-->
+        <frameName>laser_frame</frameName>
+      </plugin><!--Commenter pour permettre au lidar du robot de publier ses donnees-->
     </sensor>
   </gazebo>
 
@@ -129,7 +129,7 @@
         <cameraName>prm/rpicam</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera_1</frameName>
+        <frameName>camera_rgb_frame</frameName>
         <hackBaseline>0.07</hackBaseline>
         <distortionK1>0.0</distortionK1>
         <distortionK2>0.0</distortionK2>

@@ -1,0 +1,446 @@
+<?xml version="1.0" ?>
+<robot name="prm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--Raccourcis - similaires a des variabls auxquelles on assigne des valeurs par defaut-->
+  
+  <xacro:property name="cameraSize" value="0.05"/>
+  <xacro:property name="cameraMass" value="0.00109"/>
+
+  <xacro:include filename="$(find prm_description)/urdf/prm_reel.gazebo" />
+  <xacro:include filename="$(find prm_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find prm_description)/urdf/macros.xacro" />
+
+<!--Description des liens-->
+
+  
+<!--Chassis-->
+
+<link name="base_link">
+  <pose>0 0 0.1 0 0 1</pose>
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0839777178129331 0.04440645528739363 0.03211202600509656"/>
+    <mass value="0.27584583240478544"/>
+    <inertia ixx="0.001046" ixy="-1e-06" ixz="-0.0" iyy="0.000392" iyz="1.1e-05" izz="0.001324"/>
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!--Roue Folle-->
+
+<!--Roue Folle - Rotation z-->
+<link name='stem'>
+  <inertial>
+    <mass value="0.008"/>
+    <inertia ixx="0.0" ixy="0.0" ixz="-1e-05" iyy="0.0" iyz="1e-05" izz="0.0"/>
+  </inertial>
+
+  <collision>
+    <geometry>
+      <cylinder radius='0.010319' length='0.003408'/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <geometry>
+      <cylinder radius='0.010319' length='0.003408'/>
+    </geometry>
+  </visual>
+</link>
+
+<joint name="stem_joint" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.084 0.13815 0.011704"/>
+  <parent link="base_link"/>
+  <child link="stem"/>
+   <axis xyz="0 0 1"/>
+  <limit effort="100000000" velocity="100000000"/>
+</joint>
+
+
+<!--Roue Folle - Rotation x-->
+<link name='caster'>
+  <inertial>
+    <mass value="0.008419"/>
+    <inertia ixx="0.000135796" ixy="0.0" ixz="0.0" iyy="0.000135796" iyz="0.0" izz="0.000135796"/>
+  </inertial>
+
+  <collision>
+    <geometry>
+      <sphere radius='0.005852'/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <geometry>
+      <sphere radius='0.005852'/>
+    </geometry>
+  </visual>
+</link>
+
+<joint name="caster_joint" type="fixed">
+  <origin rpy="0 0 0" xyz="0 0 -0.007"/>
+  <parent link="stem"/>
+  <child link="caster"/>
+   <limit effort="100000000" velocity="100000000"/>
+</joint>
+
+<!--Roue gauche-->
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.016848728056798892 5.266257451158347e-06 7.513062202278709e-06"/>
+    <mass value="0.05572555972770472"/>
+    <inertia ixx="3e-05" ixy="-0.0" ixz="-0.0" iyy="1.9e-05" iyz="-0.0" izz="1.9e-05"/>
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0.029 -0.002194 -0.032408"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0.029 -0.002194 -0.032408"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>10</mu>
+            <mu2>10</mu2>
+          </ode>
+        </friction>
+      </surface>
+  </collision>
+</link>
+
+<!--Roue droite-->
+
+<link name="right_wheel_3">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.01683997258297837 -7.067395580239062e-06 5.538351484139781e-06"/>
+    <mass value="0.055725588971055603"/>
+    <inertia ixx="3e-05" ixy="0.0" ixz="-0.0" iyy="1.9e-05" iyz="0.0" izz="1.9e-05"/>
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0.139 -0.002194 -0.032408"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/right_wheel_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0.139 -0.002194 -0.032408"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/right_wheel_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>10</mu>
+            <mu2>10</mu2>
+          </ode>
+        </friction>
+      </surface>
+  </collision>
+</link>
+
+<!--Entretoises (les 4 sont representees en un fichier .stl pour plus de simplicite de manipulation)-->
+
+<link name="lien_plaque_sup_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.039999999999991334 0.06000009548239064 0.03000032830658448"/>
+    <mass value="0.016233798346575297"/>
+    <inertia ixx="6.3e-05" ixy="-0.0" ixz="0.0" iyy="3.1e-05" iyz="-0.0" izz="8.4e-05"/>
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0.044 -0.008694 -0.051408"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/lien_plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0.044 -0.008694 -0.051408"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/lien_plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!--Plaque superieure-->
+
+<link name="plaque_sup_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.03999999999999 0.060785568215751755 0.000750328306584766"/>
+    <mass value="0.09905330487184344"/>
+    <inertia ixx="0.000271" ixy="-0.0" ixz="-0.0" iyy="0.000189" iyz="0.0" izz="0.000459"/>
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0.044 -0.008694 -0.111408"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0.044 -0.008694 -0.111408"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/plaque_sup_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!--RPLidar-->
+
+<link name="laser_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.027457135055986237 -0.04006154961359419 0.024727691022917317"/>
+    <mass value="0.07305683031313406"/>
+    <inertia ixx="6.2e-05" ixy="1e-06" ixz="0.0" iyy="3.2e-05" iyz="-7e-06" izz="7.2e-05"/>
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0.112 -0.130239 -0.112908"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0.112 -0.130239 -0.112908"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!--Ajout d'un repere supplementaire pour assurer une orientation correcte du lidar-->
+<joint name="laser_joint" type="fixed">
+  <origin xyz="0 0 0.04" rpy="0 0 ${-pi/2}"/>
+  <parent link="laser_1"/>
+  <child link="laser_frame"/>
+</joint>
+
+<link name="laser_frame">
+</link>
+
+<!--Tourelle Camera - Rotation x - Tilt-->
+
+<link name="tilt_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.012530450621509828 -0.003737858709430081 0.008107618754683063"/>
+    <mass value="0.0837710951291597"/>
+    <inertia ixx="9e-06" ixy="-0.0" ixz="-0.0" iyy="1.2e-05" iyz="1e-06" izz="9e-06"/>
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0.093603 0.066257 -0.082423"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/tilt_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0.093603 0.066257 -0.082423"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/tilt_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!--CameraRpi-->
+
+<link name="camera_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.002779820488642018 -0.0006063637095087004 3.8531724794926836e-05"/>
+    <mass value="0.0010901216866178827"/>
+    <inertia ixx="1.0e-03" ixy="0.0" ixz="-0.0" iyy="1.0e-03" iyz="-0.0" izz="1.0e-03"/> <!--Inertie modifiee (nulle a la base), a ajuster (trop haute pour l'instant)-->
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0.081607 0.087487 -0.094501"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0.081607 0.087487 -0.094501"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!--Ajout d'un repere supplementaire pour assurer une orientation correcte de la camera-->
+<joint name="camera_optical_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
+  <parent link="camera_1"/>
+  <child link="camera_rgb_frame"/>
+</joint>
+
+<link name="camera_rgb_frame">
+</link>
+
+<!--Tourelle Camera - Rotation z - Pan-->
+
+<link name="pan_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0001970129647064084 -0.006971063596799054 0.01387484558911345"/>
+    <mass value="0.10221097927434729"/>
+    <inertia ixx="1.7e-05" ixy="-0.0" ixz="0.0" iyy="1.4e-05" iyz="3e-06" izz="1.9e-05"/>
+  </inertial>
+
+  <visual>
+    <origin rpy="0 0 0" xyz="0.084018 0.039106 -0.051732"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/pan_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+
+  <collision>
+    <origin rpy="0 0 0" xyz="0.084018 0.039106 -0.051732"/>
+    <geometry>
+      <mesh filename="package://prm_description/meshes/pan_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!--Description des joints et transmissions-->
+
+<!--Joint Roue gauche-->
+
+<joint name="rev_left" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.029 0.002194 0.032408"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="1 0 0"/> <!--Non pas xyz="0.01 -0.0 -0.0"-->
+</joint>
+
+<transmission name="rev_left_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rev_left">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="rev_left_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>10</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<!--Joint Roue droite-->
+
+<joint name="rev_right" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.139 0.002194 0.032408"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_3"/>
+  <axis xyz="1 0 0"/> <!--Non pas xyz="-0.01 0.0 0.0"-->
+</joint>
+
+<transmission name="rev_right_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rev_right">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="rev_right_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>10</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<!--Joint Entretoises-->
+
+<joint name="rigid_plaque_inf" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.044 0.008694 0.051408"/>
+  <parent link="base_link"/>
+  <child link="lien_plaque_sup_1"/>
+</joint>
+
+<!--Joint Plaque Superieure-->
+
+<joint name="rigid_plaque_sup" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.06"/>
+  <parent link="lien_plaque_sup_1"/>
+  <child link="plaque_sup_1"/>
+</joint>
+
+<!--Joint RPLidar-->
+
+<joint name="rplidar_joint" type="fixed">
+	<axis xyz="0 1 0"/>
+  <origin rpy="0 0 0" xyz="-0.068 0.121545 0.0015"/>  <!--origin rpy="0 0 0" xyz="-0.068 0.121545 0.0015"/--> 
+  <parent link="plaque_sup_1"/> <!--plaque_sup_1--> 
+  <child link="laser_1"/>
+</joint>
+
+<!--Joint Tilt-->
+
+<joint name="tilt_joint" type="revolute">
+  <origin rpy="0 0 0" xyz="-0.009585 -0.027151 0.030691"/>
+  <parent link="pan_1"/>
+  <child link="tilt_1"/>
+  <axis xyz="-0.01 -5.3e-05 -9e-06"/>
+  <limit effort="1000" lower="-1.434661" upper="1.434661" velocity="100"/>
+    <dynamics damping="0.1" friction="0.2"/> <!--100.0 et 200.0-->
+</joint>
+
+<transmission name="$tilt_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="tilt_joint">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="$tilt_joint_actr">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<!--Joint Camera-->
+
+<joint name="rigid_camera" type="fixed">
+  <origin rpy="0 0 0" xyz="0.011996 -0.02123 0.012078"/>
+  <parent link="tilt_1"/>
+  <child link="camera_1"/>
+</joint>
+
+<!--Joint Pan-->
+
+<joint name="pan_joint" type="revolute">
+  <origin rpy="0 0 0" xyz="-0.084018 -0.039106 0.051732"/>
+  <parent link="base_link"/>
+  <child link="pan_1"/>
+  <axis xyz="9e-06 -0.0 -0.01"/>
+  <limit effort="10000" lower="-1.570796" upper="1.570796" velocity="10000"/>
+    <dynamics damping="0.1" friction="0.2"/> <!--100.0 et 200.0-->
+</joint>
+
+<transmission name="$pan_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="pan_joint">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="$pan_joint_actr">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</robot>
