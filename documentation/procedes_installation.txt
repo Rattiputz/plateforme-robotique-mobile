@@ -89,7 +89,7 @@ et noter le nom de la Raspberry.
 
 etape 5: faire:
 
-sudo ssh prmraspi@*IP trouvée avec nmap* (ici, sudo ssh -X prmraspi@10.42.0.201)
+sudo ssh -X prmraspi@*IP trouvée avec nmap* (ici, sudo ssh -X prmraspi@10.42.0.201)
 
 et entrer le mot de passe par défaut (raspberry).
 
