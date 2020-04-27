@@ -12,12 +12,6 @@ https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
 
 Installation de ROS sur ordinateur --------------------------------------------
 
-ROS control:
-http://gazebosim.org/tutorials/?tut=ros_control
-
-ROS communication avec Ubuntu+Raspberry:
-https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
-
 ROS:
 http://wiki.ros.org/kinetic/Installation/Ubuntu (installer ros-kinetic-ros-base)
 
@@ -110,6 +104,15 @@ pour avoir plusieurs terminaux sur cette même connection SSH (https://askubuntu
 sudo raspi-config -> Change User Password
 
 Étant donné la faible sécurité du réseau de l'école, il est mandatoire de changer le mot de passe pour éviter de donner l'accès root à un inconnu une fois connecté sur le réseau de l'école.
+
+7. Augmenter la taille de root
+
+En ssh, faire
+
+gparted
+
+et augmenter la taille de la deuxième partition
+
 
 Installation de ROS sur Raspberry Pi --------------------------------------------
 
@@ -229,3 +232,10 @@ https://www.theconstructsim.com/ros-qa-070-moving-joints-gazebo-simple-example/
 
 Haute utilisation du CPU Raspberry:
 https://askubuntu.com/questions/798989/heavy-load-by-apt-unattended-upgrade
+
+ROS control:
+http://gazebosim.org/tutorials/?tut=ros_control
+
+ROS communication avec Ubuntu+Raspberry:
+https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
+
