@@ -193,7 +193,7 @@ sudo chmod 666 /dev/ttyUSB0
 
 
 
-
+tmp: roslaunch prm_navigation amcl_demo.launch map_file:=/home/magnus/prm_ws/src/prm_navigation/maps/test_map.yaml
 
 
 Firmware lidar (Rpi):
@@ -211,7 +211,10 @@ https://answers.ros.org/question/11232/how-to-turn-laser-scan-to-point-cloud-map
 http://wiki.ros.org/laser_geometry
 
 ROS SLAM navigation stack:
-https://www.generationrobots.com/blog/en/lidar-integration-with-ros-quickstart-guide-and-projects-ideas/
+http://wiki.ros.org/navigation/Tutorials/RobotSetup
+
+Envoi de sensor_msgs/laserscan:
+http://wiki.ros.org/navigation/Tutorials/RobotSetup/Sensors
 
 Mise en page wiki github:
 https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax (syntaxe sur github)
