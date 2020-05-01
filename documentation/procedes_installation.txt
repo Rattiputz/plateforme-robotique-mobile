@@ -36,6 +36,7 @@ En plus des packages cités, installer:
 2. sudo apt-get install ros-kinetic-gmapping (gmapping)
 3. sudo apt-get install ros-kinetic-turtlebot (diriger le robot au clavier)
 4. sudo apt-get install ros-kinetic-map-server ros-kinetic-amcl ros-kinetic-move-base (permettre la navigation autonome)
+5. sudo apt-get install ros-kinetic-tf-conversions (hector slam)
 
 Installation de Ubuntu Mate 16.04 sur Raspberry Pi 4 --------------------------------------------
 
@@ -198,9 +199,21 @@ sudo chmod 666 /dev/ttyUSB0
 
 tmp: roslaunch prm_navigation amcl_demo.launch map_file:=/home/magnus/prm_ws/src/prm_navigation/maps/test_map.yaml
 
+Ajouter repère Python:
+http://wiki.ros.org/tf/Tutorials/Adding%20a%20frame%20%28Python%29
+
+Cloner wiki:
+git clone https://github.com/Rattiputz/plateforme-robotique-mobile.wiki.git
 
 Firmware lidar (Rpi):
 Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche... (https://github.com/robopeak/rplidar_ros)
+
+HectorSLAM:
+https://www.youtube.com/watch?v=Qrtz0a7HaQ4
+https://github.com/tu-darmstadt-ros-pkg/hector_slam
+
+Problèmes de dépendance packages:
+https://answers.ros.org/question/235061/could-not-find-tf_conversions-package-configuration-file/
 
 Comprendre tf:
 https://www.youtube.com/watch?v=dBATvRhvGRI
