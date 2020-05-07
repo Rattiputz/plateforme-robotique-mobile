@@ -10,25 +10,24 @@ sudo apt-get install nvidia-430
 Tutorial GitHub:
 https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
 
-Installation de ROS --------------------------------------------
-
-ROS control:
-http://gazebosim.org/tutorials/?tut=ros_control
-
-ROS communication avec Ubuntu+Raspberry:
-https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
+Installation de ROS sur ordinateur --------------------------------------------
 
 ROS:
 http://wiki.ros.org/kinetic/Installation/Ubuntu (installer ros-kinetic-ros-base)
 
-1. Ici on n'installe que ROS base. Par la suite, nous installerons gazebo9 (alors que la version par défaut est gazebo7). Nous installerons les autres packages nécessaires manuellement.
-2. Vérifier que ROS est bien installé (passer à la suite après l'actualisation de rosdep).
+1. Ici on n'installe que ROS base (sudo apt-get install ros-kinetic-ros-base). Par la suite, nous installerons gazebo9 (alors que la version par défaut est gazebo7). Nous installerons les autres packages nécessaires manuellement.
 
-Gazebo9 (seulement sur ordinateur?):
+2. Vérifier que ROS est bien installé avec:
+
+roscore
+
+(passer à la suite après l'actualisation de rosdep).
+
+Gazebo9 (seulement sur ordinateur):
 https://medium.com/@abhiksingla10/setting-up-ros-kinetic-and-gazebo-8-or-9-70f2231af21a
 http://gazebosim.org/tutorials?tut=install_ubuntu&cat=install
 
-1. Suivre les instructions manuelles du deuxième lien pour récupérer les repos des versions de gazebo adaptées à ROS kinetic (ne pas installer gazebo pour l'instant).
+1. Suivre les instructions manuelles du deuxième lien pour récupérer les repos des versions de gazebo adaptées à ROS kinetic (ne pas installer gazebo-11).
 2. Reprendre le premier lien à l'installation de gazebo9. S'assurer que les packages sont bien présents auparavent.
 
 En plus des packages cités, installer:
@@ -37,6 +36,7 @@ En plus des packages cités, installer:
 2. sudo apt-get install ros-kinetic-gmapping (gmapping)
 3. sudo apt-get install ros-kinetic-turtlebot (diriger le robot au clavier)
 4. sudo apt-get install ros-kinetic-map-server ros-kinetic-amcl ros-kinetic-move-base (permettre la navigation autonome)
+5. sudo apt-get install ros-kinetic-tf-conversions (hector slam)
 
 Installation de Ubuntu Mate 16.04 sur Raspberry Pi 4 --------------------------------------------
 
@@ -90,7 +90,7 @@ et noter le nom de la Raspberry.
 
 etape 5: faire:
 
-sudo ssh prmraspi@*IP trouvée avec nmap* (ici, sudo ssh -X prmraspi@10.42.0.201)
+sudo ssh -X prmraspi@*IP trouvée avec nmap* (ici, sudo ssh -X prmraspi@10.42.0.201)
 
 et entrer le mot de passe par défaut (raspberry).
 
@@ -106,18 +106,152 @@ sudo raspi-config -> Change User Password
 
 Étant donné la faible sécurité du réseau de l'école, il est mandatoire de changer le mot de passe pour éviter de donner l'accès root à un inconnu une fois connecté sur le réseau de l'école.
 
+7. Augmenter la taille de root
+
+En ssh, faire
+
+gparted
+
+et augmenter la taille de la deuxième partition
+
+
+Installation de ROS sur Raspberry Pi --------------------------------------------
+
+Même installation que sur pc en passant l'installation de gazebo9 (non nécessaire sur la Raspberry). Il faut cette fois installer
+
+ros-kinetic-desktop-full
+
+en s'assurant que les packages précisés ci-dessus sont bien installés.
+
 Mise en oeuvre --------------------------------------------
 
-Firmware lidar (Rpi):
-Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche...
-
-Exemple connection ROS:
+Lien entre Raspberry et PC:
 https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
 
-Tutoriel complet:
-https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/robot-creation-first-ros-robot/
+1. Faire ifconfig sur PC et Raspberry et récupérer les adresses IP. Ensuite, faire:
+
+sudo nano /etc/hosts
+
+et ajouter:
+
+10.42.0.1       pc-ros
+10.42.0.201     raspberry-1
+
+sur PC et Raspberry (en substituant les adresses IP correctes).
+
+2. Sur le PC (qui sera maître):
+
+echo 'export ROS_HOSTNAME=pc-ros' >> ~/.bashrc
+echo 'export ROS_MASTER_URI=http://pc-ros:11311' >> ~/.bashrc
+
+3. Sur la Raspberry (qui sera esclave):
+
+echo 'export ROS_HOSTNAME=raspberry-1' >> ~/.bashrc
+echo 'export ROS_MASTER_URI=http://pc-ros:11311' >> ~/.bashrc
+
+4. Tester la connection en faisant:
+
+ping pc-ros (respectivement ping raspberry-1)
+
+Ensuite, sur l'ordinateur lancer:
+
+roscore
+
+puis:
+
+rostopic pub /test std_msgs/Float32 5.0
+
+et sur la Raspberry:
+
+rostopic echo /test
+
+Normallement la Raspberry devrait afficher la valeur 5.0. Les deux ordinateurs sont maintenant connectés. Comme cette modification est permanente, il suffit d'utiliser le ssh pour avoir accès à la Raspberry.
+
+Remarque: pour utiliser ros sur un ordinateur sans connexion au robot, il faut commenter les lignes:
+
+export ROS_HOSTNAME=pc-ros
+export ROS_MASTER_URI=http://pc-ros:11311
+
+de .bashrc .
+
+Changer de nom d'un package:
+https://answers.ros.org/question/28165/renaming-a-package/
+
+1. Changer le nom du dossier, le nom du projet (CMakeList.txt) et le nom du package (package.xml).
+2. Lancer:
+
+catkin_make
+
+dans le workspace.
+
+3. Faire:
+
+rospack profile
+
+pour que Ros trouve les changements.
+
+Lancer le lidar sur Raspberry: ne pas oublier:
+
+sudo chmod 666 /dev/ttyUSB0
+
+
+
+
+tmp: roslaunch prm_navigation amcl_demo.launch map_file:=/home/magnus/prm_ws/src/prm_navigation/maps/test_map.yaml
+
+Ajouter repère Python:
+http://wiki.ros.org/tf/Tutorials/Adding%20a%20frame%20%28Python%29
+
+Cloner wiki:
+git clone https://github.com/Rattiputz/plateforme-robotique-mobile.wiki.git
+
+Markdown collaps:
+https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab
+
+Firmware lidar (Rpi):
+Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche... (https://github.com/robopeak/rplidar_ros)
+
+HectorSLAM:
+https://www.youtube.com/watch?v=Qrtz0a7HaQ4
+https://github.com/tu-darmstadt-ros-pkg/hector_slam
+
+Problèmes de dépendance packages:
+https://answers.ros.org/question/235061/could-not-find-tf_conversions-package-configuration-file/
+
+Comprendre tf:
+https://www.youtube.com/watch?v=dBATvRhvGRI
+https://linklab-uva.github.io/autonomousracing/assets/files/L11-compressed.pdf
+
+Comprendre RPlidar et Hector SLAM:
+https://www.youtube.com/watch?v=Qrtz0a7HaQ4
+
+Conversion de laser scan en pointcloud:
+https://answers.ros.org/question/11232/how-to-turn-laser-scan-to-point-cloud-map/
+http://wiki.ros.org/laser_geometry
+
+ROS SLAM navigation stack:
+http://wiki.ros.org/navigation/Tutorials/RobotSetup
+
+Envoi de sensor_msgs/laserscan:
+http://wiki.ros.org/navigation/Tutorials/RobotSetup/Sensors
+
+Mise en page wiki github:
+https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax (syntaxe sur github)
+
+Bonnes pratiques pour la gestion de packages:
+https://answers.ros.org/question/12932/best-practice-urdf-descriptions-real-robots-gazebo-plugins-and-dependencies/
 
 Contrôleurs (utilisation du joint_position_controller pour la tourelle caméra):
 http://wiki.ros.org/ros_control
 http://gazebosim.org/tutorials/?tut=ros_control
 https://www.theconstructsim.com/ros-qa-070-moving-joints-gazebo-simple-example/
+
+Haute utilisation du CPU Raspberry:
+https://askubuntu.com/questions/798989/heavy-load-by-apt-unattended-upgrade
+
+ROS control:
+http://gazebosim.org/tutorials/?tut=ros_control
+
+ROS communication avec Ubuntu+Raspberry:
+https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
+

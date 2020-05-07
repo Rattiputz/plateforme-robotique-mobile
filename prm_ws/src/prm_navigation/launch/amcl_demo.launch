@@ -7,12 +7,13 @@
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
   <!-- Place map frame at odometry frame -->
-  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
-      args="0 0 0 0 0 0 map odom 100"/>
+  <!--node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
+      args="0 0 0 0 0 0 map odom 100"/-->
 
   <!-- Localization -->
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
     <!--remap from="scan" to="prm/laser/scan"/-->
+    <!--remap from="map" to="map_unused"/--> <!--Change le nom de la carte pour permettre le placement du repere map sur odom-->
     <param name="odom_frame_id" value="odom"/>
     <param name="odom_model_type" value="diff-corrected"/>
     <param name="base_frame_id" value="base_link"/>

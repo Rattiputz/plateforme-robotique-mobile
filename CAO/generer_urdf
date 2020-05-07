@@ -1,0 +1,163 @@
+0. Wiki sur les plugins: http://gazebosim.org/tutorials?tut=ros_gzplugins
+https://github.com/ros-simulation/gazebo_ros_pkgs
+
+1. Utiliser fusion2urdf sur UNE COPIE (dans notre cas PRM_components_urdf) de PRM_components (ouvert dans Fusion 360). ATTENTION: avant d'utiliser fusion2urdf, changer les unités en millimètres.
+
+2. Copier le dossier généré (ici /PRM_components_urdf_description)
+
+3. Actualiser les fichiers du modèle URDF dans src: (ATTENTION: ne pas utiliser de caractères spéciaux)
+3.1 Copier les fichiers .stl du dossier /PRM_components_urdf_description/mm_stl dans ~/prm_ws/src/prm_description/meshes en ne gardant que README.md (en effectuant une sauvegarde des anciens .stl avant). Il est important de convertir les .stl ASCII en .stl binary si cela n'est pas déjà le cas (exemple: https://github.com/cmpolis/convertSTL.git). Normallement la version la plus récente du script le fait automatiquement.
+
+3.2. Modifier prm.xacro
+Le nouveau contenu de prm.xacro est /PRM_components_urdf_description/urdf/PRM_components_urdf.xacro. Le fichier contient les liens et joints tels définis dans le modèle Fusion. Nous préconisons de garder l'ordre du fichier d'origine et de compléter dans le même ordre que celui du nouveau fichier généré.
+3.2.1. Pour chaque lien, il faut changer le paramètre <mesh filename="[...]"/> pour qu'il corresponde au chemin vers les .stl du workspace (dans notre cas <mesh filename="package://prm_description/meshes/[nom du fichier ici]"/>). Le matériau par défaut peut être supprimé.
+
+3.2.2. Modifier les propriétés des joints et transmissions pour qu'elles correspondent aux propriétées voulues (par exemple réduction au niveau des roues, frottements...). Modifier les transmissions en EffortJointInterface. Pour les encastrements (rigid_), supprimer la transmission générée automatiquement (les transmissions se trouvent dans un fichier à part dans la version la plus récente du plugin).
+
+3.2.3. Mettre à jour les meta-données:
+
+Modifier le début du document:
+
+<robot name="prm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--Raccourcis - similaires a des variabls auxquelles on assigne des valeurs par defaut-->
+  
+  <xacro:property name="cameraSize" value="0.05"/>
+  <xacro:property name="cameraMass" value="0.00109"/>
+  <xacro:include filename="$(find prm_description)/urdf/prm.gazebo" />
+  <xacro:include filename="$(find prm_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find prm_description)/urdf/macros.xacro" />
+
+La roue folle doit être remplacée par le code suivant (supprimer les liens/joints/transmissions associés auparavent):
+
+<!--Roue Folle-->
+
+<!--Roue Folle - Rotation z-->
+<link name='stem'>
+  <inertial>
+    <mass value="0.008"/>
+    <inertia ixx="0.0" ixy="0.0" ixz="-1e-05" iyy="0.0" iyz="1e-05" izz="0.0"/>
+  </inertial>
+
+  <collision>
+    <geometry>
+      <cylinder radius='0.010319' length='0.003408'/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <geometry>
+      <cylinder radius='0.010319' length='0.003408'/>
+    </geometry>
+  </visual>
+</link>
+
+<joint name="stem_joint" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.084 0.13815 0.011704"/>
+  <parent link="base_link"/>
+  <child link="stem"/>
+   <axis xyz="0 0 1"/>
+  <limit effort="100000000" velocity="100000000"/>
+</joint>
+
+
+<!--Roue Folle - Rotation x-->
+<link name='caster'>
+  <inertial>
+    <mass value="0.008419"/>
+    <inertia ixx="0.000135796" ixy="0.0" ixz="0.0" iyy="0.000135796" iyz="0.0" izz="0.000135796"/>
+  </inertial>
+
+  <collision>
+    <geometry>
+      <sphere radius='0.005852'/>
+    </geometry>
+  </collision>
+
+  <visual>
+    <geometry>
+      <sphere radius='0.005852'/>
+    </geometry>
+  </visual>
+</link>
+
+<joint name="caster_joint" type="fixed">
+  <origin rpy="0 0 0" xyz="0 0 -0.007"/>
+  <parent link="stem"/>
+  <child link="caster"/>
+   <limit effort="100000000" velocity="100000000"/>
+</joint>
+
+De plus, il faut modifier l'axe de rotation des roues:
+
+<joint name="rev_left" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.029 0.002194 0.032408"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="1 0 0"/>
+</joint>
+
+et
+
+<joint name="rev_right" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.139 0.002194 0.032408"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_3"/>
+  <axis xyz="1 0 0"/>
+</joint>
+
+La caméra ne regarde pas dans la bonne direction, il faut ajouter les lignes suivantes pour un repère supplémentaire qui corrige cela:
+
+<joint name="camera_optical_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
+  <parent link="camera_1"/>
+  <child link="camera_rgb_frame"/>
+</joint>
+
+<link name="camera_rgb_frame">
+</link>
+
+De même, faire la modification suivante pour le lidar:
+
+<!--Ajout d'un repere supplementaire pour assurer une orientation correcte du lidar-->
+<joint name="laser_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 ${-pi/2}"/>
+  <parent link="laser_1"/>
+  <child link="laser_frame"/>
+</joint>
+
+<link name="laser_frame">
+</link>
+
+Dernièrement, la caméra est générée sans inertie, il faut lui en donner une pour que le modèle soit stable:
+
+<link name="camera_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.002779820488642018 -0.0006063637095087004 3.8531724794926836e-05"/>
+    <mass value="0.0010901216866178827"/>
+    <inertia ixx="1.0e-03" ixy="0.0" ixz="-0.0" iyy="1.0e-03" iyz="-0.0" izz="1.0e-03"/> <!--Inertie modifiee (nulle a la base), a ajuster (trop haute pour l'instant)-->
+  </inertial>
+
+3.3. Modifier prm.gazebo
+3.3.1. Modifier le nom des joints s'ils ont subi des modifications dans prm.xacro (notamment camera_*, laser_* changent de nom avec le numéro de la version sur fusion 360)
+
+3.4. Modifier prm_control/prm_control.yaml
+3.4.1. Modifier les propriétés des controllers (nom...)
+
+3.4.2. Ajuster le gain des controlleurs caméra:
+
+  camera_pan_controller:
+    type: "effort_controllers/JointPositionController"
+    joint: "pan_joint"
+    pid: {p: 0.5, i: 0.5, d: 0.0} #Attention, d peut rendre le modele extremement instable
+
+  camera_tilt_controller:
+    type: "effort_controllers/JointPositionController"
+    joint: "tilt_joint"
+    pid: {p: 0.5, i: 0.5, d: 0.0}
+
+
+
+Quand le résultat de la simulation est satisfaisant, nous préconisons de remplacer les fichiers modifiés dans /plateforme-robotique-mobile (repo), puisqu'il s'agira toujours de la version précédente. Cela permet aussi de mettre à jour facilement le remote sur github.
+
+

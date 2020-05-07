@@ -10,6 +10,8 @@ Panels:
         - /LaserScan1
         - /Path (local)1
         - /Path (global)1
+        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 775
   - Class: rviz/Selection
@@ -63,58 +65,66 @@ Visualization Manager:
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        Left_Wheel_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        Lien_PlaqueSup:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         Link Tree Style: Links in Alphabetic Order
-        Pan:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        Plaque_sup:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        Right_Wheel_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        Tilt:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        camera:
+        camera_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_rgb_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         caster:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        laser:
+        laser_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        laser_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_wheel_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lien_plaque_sup_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        pan_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        plaque_sup_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel_3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         stem:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tilt_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -211,6 +221,69 @@ Visualization Manager:
       Topic: /move_base/TrajectoryPlannerROS/global_plan
       Unreliable: false
       Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        base_link:
+          Value: false
+        camera_1:
+          Value: false
+        camera_rgb_frame:
+          Value: false
+        caster:
+          Value: false
+        laser_1:
+          Value: false
+        laser_frame:
+          Value: false
+        left_wheel_1:
+          Value: false
+        lien_plaque_sup_1:
+          Value: false
+        map:
+          Value: true
+        odom:
+          Value: true
+        pan_1:
+          Value: false
+        plaque_sup_1:
+          Value: false
+        right_wheel_3:
+          Value: false
+        stem:
+          Value: false
+        tilt_1:
+          Value: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        map:
+          odom:
+            base_link:
+              left_wheel_1:
+                {}
+              lien_plaque_sup_1:
+                plaque_sup_1:
+                  laser_1:
+                    laser_frame:
+                      {}
+              pan_1:
+                tilt_1:
+                  camera_1:
+                    camera_rgb_frame:
+                      {}
+              right_wheel_3:
+                {}
+              stem:
+                caster:
+                  {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -236,7 +309,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.65638542
+      Distance: 42.3047256
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
