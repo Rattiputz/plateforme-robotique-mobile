@@ -14,11 +14,11 @@
     <param name="base_frame" value="base_link" />
     <param name="frame_id" value="base_scan" />
 
-    <param name="linearUpdate" value="0.5"/>
-    <param name="angularUpdate" value="0.436"/>
+    <param name="linearUpdate" value="0.05"/>
+    <param name="angularUpdate" value="0.001"/> <!--default : 0.436-->
     <param name="temporalUpdate" value="-1.0"/>
     <param name="resampleThreshold" value="0.5"/>
-    <param name="particles" value="80"/>
+    <param name="particles" value="100"/> <!--Diminuer pour une meilleure performance-->
 
   </node>
 

@@ -234,12 +234,12 @@
 
 <!--Ajout d'un repere supplementaire pour assurer une orientation correcte du lidar-->
 <joint name="laser_joint" type="fixed">
-  <origin xyz="0 0 0.04" rpy="0 0 0"/>
-  <parent link="laser_1"/>
-  <child link="laser_frame"/>
+  <origin xyz="0 0 0.16" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="laser"/>
 </joint>
 
-<link name="laser_frame">
+<link name="laser">
 </link>
 
 <!--Tourelle Camera - Rotation x - Tilt-->

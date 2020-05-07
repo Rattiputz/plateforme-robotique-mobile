@@ -75,7 +75,7 @@
 
   
 
-<gazebo reference="laser_frame">
+<gazebo reference="laser">
     <sensor type="gpu_ray" name="head_rplidar_sensor">
       <pose>0 0 0.06 0 0 0</pose>
       <visualize>false</visualize>
@@ -102,7 +102,7 @@
       </ray>
       <plugin name="gazebo_ros_head_rplidar_controller" filename="libgazebo_ros_gpu_laser.so">
         <topicName>scan</topicName>
-        <frameName>laser_frame</frameName>
+        <frameName>laser</frameName>
       </plugin><!--Commenter pour permettre au lidar du robot de publier ses donnees-->
     </sensor>
   </gazebo>
