@@ -205,6 +205,9 @@ http://wiki.ros.org/tf/Tutorials/Adding%20a%20frame%20%28Python%29
 Cloner wiki:
 git clone https://github.com/Rattiputz/plateforme-robotique-mobile.wiki.git
 
+Markdown collaps:
+https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab
+
 Firmware lidar (Rpi):
 Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche... (https://github.com/robopeak/rplidar_ros)
 
