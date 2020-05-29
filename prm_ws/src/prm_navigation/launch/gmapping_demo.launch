@@ -15,10 +15,14 @@
     <param name="frame_id" value="base_scan" />
 
     <param name="linearUpdate" value="0.05"/>
-    <param name="angularUpdate" value="0.001"/> <!--default : 0.436-->
-    <param name="temporalUpdate" value="-1.0"/>
+    <param name="angularUpdate" value="0.1"/> <!--default : 0.436-->
+    <param name="temporalUpdate" value="0.5"/> <!--default : -1-->
     <param name="resampleThreshold" value="0.5"/>
+
     <param name="particles" value="100"/> <!--Diminuer pour une meilleure performance-->
+    <param name="map_update_interval" value="1"/> <!--default : 5-->
+    <param name="iterations" value="10"/> <!--default : 5-->
+    <param name="minimumScore" value="50"/> <!--default : 0, elimine le mauvais scanmatching-->
 
   </node>
 
