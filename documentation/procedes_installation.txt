@@ -194,13 +194,7 @@ Lancer le lidar sur Raspberry: ne pas oublier:
 
 sudo chmod 666 /dev/ttyUSB0
 
-
-
-
-tmp: roslaunch prm_navigation amcl_demo.launch map_file:=/home/magnus/prm_ws/src/prm_navigation/maps/test_map.yaml
-
-Ajouter repère Python:
-http://wiki.ros.org/tf/Tutorials/Adding%20a%20frame%20%28Python%29
+Wiki --------------------------------------------
 
 Cloner wiki:
 git clone https://github.com/Rattiputz/plateforme-robotique-mobile.wiki.git
@@ -208,22 +202,27 @@ git clone https://github.com/Rattiputz/plateforme-robotique-mobile.wiki.git
 Markdown collaps:
 https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab
 
+Mise en page wiki github:
+https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax (syntaxe sur github)
+
+SLAM et tf --------------------------------------------
+
+tmp: roslaunch prm_navigation amcl_demo.launch map_file:=/home/magnus/prm_ws/src/prm_navigation/maps/test_map.yaml
+
+Ajouter repère Python (hector SLAM):
+http://wiki.ros.org/tf/Tutorials/Adding%20a%20frame%20%28Python%29
+
 Firmware lidar (Rpi):
 Ne pas s'embêter avec si ttyUSB0 n'est pas detecté, prendre un câble qui marche... (https://github.com/robopeak/rplidar_ros)
 
 HectorSLAM:
 https://www.youtube.com/watch?v=Qrtz0a7HaQ4
 https://github.com/tu-darmstadt-ros-pkg/hector_slam
-
-Problèmes de dépendance packages:
-https://answers.ros.org/question/235061/could-not-find-tf_conversions-package-configuration-file/
+https://answers.ros.org/question/337131/laser-scan-not-being-used-for-costmap/
 
 Comprendre tf:
 https://www.youtube.com/watch?v=dBATvRhvGRI
 https://linklab-uva.github.io/autonomousracing/assets/files/L11-compressed.pdf
-
-Comprendre RPlidar et Hector SLAM:
-https://www.youtube.com/watch?v=Qrtz0a7HaQ4
 
 Conversion de laser scan en pointcloud:
 https://answers.ros.org/question/11232/how-to-turn-laser-scan-to-point-cloud-map/
@@ -231,12 +230,33 @@ http://wiki.ros.org/laser_geometry
 
 ROS SLAM navigation stack:
 http://wiki.ros.org/navigation/Tutorials/RobotSetup
+http://wiki.ros.org/move_base
+
+Comprendre RPlidar et Hector SLAM:
+https://www.youtube.com/watch?v=Qrtz0a7HaQ4
+
+ROS control:
+http://gazebosim.org/tutorials/?tut=ros_control
+
+Combiner plusieurs capteurs dans ROS navigation stack:
+https://answers.ros.org/question/337131/laser-scan-not-being-used-for-costmap/
+
+Pas de local costmap:
+https://answers.ros.org/question/119051/local-costmap-empty-using-move_base_node/
+https://wiki.ros.org/costmap_2d
+http://www.programmersought.com/article/6482136097/
+
+
+
+
+Lancement de plusieurs robots:
+https://www.theconstructsim.com/ros-qa-130-how-to-launch-multiple-robots-in-gazebo-simulator/
+
+Problèmes de dépendance packages:
+https://answers.ros.org/question/235061/could-not-find-tf_conversions-package-configuration-file/
 
 Envoi de sensor_msgs/laserscan:
 http://wiki.ros.org/navigation/Tutorials/RobotSetup/Sensors
-
-Mise en page wiki github:
-https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax (syntaxe sur github)
 
 Bonnes pratiques pour la gestion de packages:
 https://answers.ros.org/question/12932/best-practice-urdf-descriptions-real-robots-gazebo-plugins-and-dependencies/
@@ -248,9 +268,6 @@ https://www.theconstructsim.com/ros-qa-070-moving-joints-gazebo-simple-example/
 
 Haute utilisation du CPU Raspberry:
 https://askubuntu.com/questions/798989/heavy-load-by-apt-unattended-upgrade
-
-ROS control:
-http://gazebosim.org/tutorials/?tut=ros_control
 
 ROS communication avec Ubuntu+Raspberry:
 https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
