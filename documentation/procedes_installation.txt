@@ -70,7 +70,7 @@ Normalement il faudrait changer le PARTUUID (ou le UUID) dans cette ligne de com
 https://www.youtube.com/watch?v=8qleH35Kgjk
 https://thepihut.com/blogs/raspberry-pi-tutorials/19668676-renaming-your-raspberry-pi-the-hostname
 
-etape 1: insérer un fichier text brut vide nommé "ssh" sur PI_BOOT (attention à ne pas lui donner d'extension comme .txt. Il est possible de vérifier dans propriétés que le fichier n'a pas d'extension).
+etape 1: insérer un fichier text brut vide nommé "ssh" sur PI_BOOT (attention à ne pas lui donner d'extension comme .txt. Il est possible de vérifier dans les propriétés que le fichier n'a pas d'extension).
 
 etape 2: dans l'onglet réseau sur l'ordinateur, cliquer Modification des connections... -> Ajouter -> Ethernet, puis dans les paramètres IPv4 sélectionner "Partagé avec d'autres ordinateurs". Dans les paramètres IPv6, sélectionner "Ignorer".
 
@@ -92,7 +92,9 @@ etape 5: faire:
 
 sudo ssh -X prmraspi@*IP trouvée avec nmap* (ici, sudo ssh -X prmraspi@10.42.0.201)
 
-et entrer le mot de passe par défaut (raspberry).
+et entrer le mot de passe par défaut (raspberry). Si la connection n'est pas établie, il faut manuellement activer le ssh sur la Raspberry avec la commande
+
+sudo systemctl enable ssh
 
 etape 6: faire:
 
