@@ -176,6 +176,7 @@ export ROS_MASTER_URI=http://pc-ros:11311
 
 de .bashrc .
 
+
 Changer de nom d'un package:
 https://answers.ros.org/question/28165/renaming-a-package/
 
@@ -191,6 +192,7 @@ dans le workspace.
 rospack profile
 
 pour que Ros trouve les changements.
+
 
 Lancer le lidar sur Raspberry: ne pas oublier:
 
@@ -248,8 +250,7 @@ https://answers.ros.org/question/119051/local-costmap-empty-using-move_base_node
 https://wiki.ros.org/costmap_2d
 http://www.programmersought.com/article/6482136097/
 
-
-
+Problèmes généraux --------------------------------------------
 
 Lancement de plusieurs robots:
 https://www.theconstructsim.com/ros-qa-130-how-to-launch-multiple-robots-in-gazebo-simulator/
@@ -273,4 +274,10 @@ https://askubuntu.com/questions/798989/heavy-load-by-apt-unattended-upgrade
 
 ROS communication avec Ubuntu+Raspberry:
 https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
+
+
+
+Caméra: (sur Rasperry Pi)
+https://discourse.ros.org/t/raspberry-pi-camera-node/1388
+https://packages.ubiquityrobotics.com/
 
