@@ -136,6 +136,7 @@ sudo nano /etc/hosts
 
 et ajouter:
 
+# Adresses IP ROS
 10.42.0.1       pc-ros
 10.42.0.201     raspberry-1
 
@@ -274,6 +275,18 @@ https://askubuntu.com/questions/798989/heavy-load-by-apt-unattended-upgrade
 
 ROS communication avec Ubuntu+Raspberry:
 https://github.com/mktk1117/six_wheel_robot/wiki/Communication-between-Raspberry-Pi-and-PC-(ROS)
+
+UART:
+https://www.raspberrypi.org/forums/viewtopic.php?t=244827
+https://raspberrypi.stackexchange.com/questions/104464/where-are-the-uarts-on-the-raspberry-pi-4
+https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart
+https://roboticsbackend.com/raspberry-pi-arduino-serial-communication/
+(com UART)
+https://www.youtube.com/watch?v=L6s489mcy8A   <---- Espagnol
+(attribuer un nom fixe à une lisaison USB)
+https://www.freva.com/2019/06/20/assign-fixed-usb-port-names-to-your-raspberry-pi/
+(changer de nom)
+https://www.domoticz.com/wiki/Assign_fixed_device_name_to_USB_port
 
 
 
