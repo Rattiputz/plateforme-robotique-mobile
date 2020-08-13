@@ -294,3 +294,5 @@ Caméra: (sur Rasperry Pi)
 https://discourse.ros.org/t/raspberry-pi-camera-node/1388
 https://packages.ubiquityrobotics.com/
 
+Codeurs:
+https://answers.ros.org/question/276574/writeimprove-a-ros-node-to-publish-encoder-data/
