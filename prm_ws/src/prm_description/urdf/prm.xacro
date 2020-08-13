@@ -18,9 +18,9 @@
 <link name="base_link">
   <pose>0 0 0.1 0 0 1</pose>
   <inertial>
-    <origin rpy="0 0 0" xyz="-0.05310169706081706 0.0034414832617332054 0.032112026005096383"/>
-    <mass value="0.27584583240478544"/>
-    <inertia ixx="0.000392" ixy="1e-06" ixz="-1.1e-05" iyy="0.001046" iyz="-0.0" izz="0.001324"/>
+    <origin rpy="0 0 0" xyz="-0.10577629127207062 0.005761505432528843 0.03808535197655524"/>
+    <mass value="1.0594038588025692"/>
+    <inertia ixx="0.001676" ixy="0.000152" ixz="0.000333" iyy="0.008771" iyz="-7.1e-05" izz="0.009683"/>
   </inertial>
 
   <visual>
@@ -61,7 +61,7 @@
 </link>
 
 <joint name="stem_joint" type="fixed">
-  <origin rpy="0 0 0" xyz="-0.146845 0.003419 0.012"/>
+  <origin rpy="0 0 0" xyz="-0.192139 0.003419 0.011704"/>
   <parent link="base_link"/>
   <child link="stem"/>
    <axis xyz="0 0 1"/>
@@ -90,7 +90,7 @@
 </link>
 
 <joint name="caster_joint" type="fixed">
-  <origin rpy="0 0 0" xyz="0 0 -0.007"/>
+  <origin rpy="0 0 0" xyz="0.0 0.0 -0.007397"/>
   <parent link="stem"/>
   <child link="caster"/>
    <limit effort="100000000" velocity="100000000"/>
@@ -100,8 +100,8 @@
 
 <link name="left_wheel_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="-5.508030874472672e-06 0.01684892913146528 7.513062201813803e-06"/>
-    <mass value="0.05572555972770472"/>
+    <origin rpy="0 0 0" xyz="-5.514750903637747e-06 0.01684893311479653 7.516213665285931e-06"/>
+    <mass value="0.0557255774837727"/>
     <inertia ixx="1.9e-05" ixy="0.0" ixz="0.0" iyy="3e-05" iyz="-0.0" izz="1.9e-05"/>
   </inertial>
 
@@ -132,7 +132,7 @@
 
 <link name="right_wheel_3">
   <inertial>
-    <origin rpy="0 0 0" xyz="6.825622156370059e-06 -0.0168397715083117 5.53835148414672e-06"/>
+    <origin rpy="0 0 0" xyz="6.825622156371794e-06 -0.0168397715083117 5.538351484139781e-06"/>
     <mass value="0.055725588971055603"/>
     <inertia ixx="1.9e-05" ixy="-0.0" ixz="-0.0" iyy="3e-05" iyz="-0.0" izz="1.9e-05"/>
   </inertial>
@@ -188,9 +188,9 @@
 
 <link name="plaque_sup_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="-0.06078580998917531 -0.03999979892532401 0.0007503283065849048"/>
-    <mass value="0.09905330487184344"/>
-    <inertia ixx="0.000189" ixy="0.0" ixz="0.0" iyy="0.000271" iyz="-0.0" izz="0.000459"/>
+    <origin rpy="0 0 0" xyz="-0.06029791949219093 -0.03999979900860389 0.00604737283687512"/>
+    <mass value="0.26145266960030816"/>
+    <inertia ixx="0.000583" ixy="1e-06" ixz="-0.0" iyy="0.001267" iyz="0.0" izz="0.001836"/>
   </inertial>
 
   <visual>
@@ -212,20 +212,20 @@
 
 <link name="laser_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.040061307840170784 0.027457336130652665 0.0247276910229174"/>
-    <mass value="0.07305683031313406"/>
-    <inertia ixx="3.2e-05" ixy="-1e-06" ixz="7e-06" iyy="6.2e-05" iyz="0.0" izz="7.2e-05"/>
+    <origin rpy="0 0 0" xyz="0.03968835231768589 0.027497343099224456 0.022537081249719412"/>
+    <mass value="0.07886865487875269"/>
+    <inertia ixx="4e-05" ixy="-1e-06" ixz="6e-06" iyy="7.4e-05" iyz="0.0" izz="8.3e-05"/>
   </inertial>
 
   <visual>
-    <origin rpy="0 0 0" xyz="0.138934 0.024581 -0.112908"/>
+    <origin rpy="0 0 0" xyz="0.138934 0.024581 -0.122908"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
 
   <collision>
-    <origin rpy="0 0 0" xyz="0.138934 0.024581 -0.112908"/>
+    <origin rpy="0 0 0" xyz="0.138934 0.024581 -0.122908"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/laser_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -234,7 +234,7 @@
 
 <!--Ajout d'un repere supplementaire pour assurer une orientation correcte du lidar-->
 <joint name="laser_joint" type="fixed">
-  <origin xyz="0 0 0.16" rpy="0 0 0"/>
+  <origin xyz="-0.11 0 0.168" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="laser"/>
 </joint>
@@ -246,20 +246,20 @@
 
 <link name="tilt_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.003738616936006807 0.012530651696176127 0.008107618754683021"/>
+    <origin rpy="0 0 0" xyz="0.0037386169360073412 0.012530560104144628 0.008107618712737519"/>
     <mass value="0.0837710951291597"/>
     <inertia ixx="1.2e-05" ixy="0.0" ixz="-1e-06" iyy="9e-06" iyz="-0.0" izz="9e-06"/>
   </inertial>
 
   <visual>
-    <origin rpy="0 0 0" xyz="-0.057561 0.006184 -0.082423"/>
+    <origin rpy="0 0 0" xyz="-0.087561 0.006184 -0.082523"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/tilt_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
 
   <collision>
-    <origin rpy="0 0 0" xyz="-0.057561 0.006184 -0.082423"/>
+    <origin rpy="0 0 0" xyz="-0.087561 0.006184 -0.082523"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/tilt_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -270,20 +270,20 @@
 
 <link name="camera_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.0006061219360854186 -0.0027796194139754413 3.853172479532929e-05"/>
-    <mass value="0.0010901216866178827"/>
+    <origin rpy="0 0 0" xyz="0.0006061218390486928 -0.002779711025054816 3.853164737116499e-05"/>
+    <mass value="0.0010901216474161416"/>
     <inertia ixx="1.0e-03" ixy="0.0" ixz="-0.0" iyy="1.0e-03" iyz="-0.0" izz="1.0e-03"/> <!--Inertie modifiee (nulle a la base), a ajuster (trop haute pour l'instant)-->
   </inertial>
 
   <visual>
-    <origin rpy="0 0 0" xyz="-0.078792 -0.005812 -0.094501"/>
+    <origin rpy="0 0 0" xyz="-0.108792 -0.005812 -0.094601"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
 
   <collision>
-    <origin rpy="0 0 0" xyz="-0.078792 -0.005812 -0.094501"/>
+    <origin rpy="0 0 0" xyz="-0.108792 -0.005812 -0.094601"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -294,20 +294,20 @@
 
 <link name="pan_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.006970821823375661 -0.000197811890040082 0.01387484558911331"/>
-    <mass value="0.10221097927434729"/>
+    <origin rpy="0 0 0" xyz="0.0069708218233762095 -0.00020090348207176673 0.01747484554716784"/>
+    <mass value="0.10221097927434727"/>
     <inertia ixx="1.4e-05" ixy="0.0" ixz="-3e-06" iyy="1.7e-05" iyz="0.0" izz="1.9e-05"/>
   </inertial>
 
   <visual>
-    <origin rpy="0 0 0" xyz="-0.030411 -0.003402 -0.051732"/>
+    <origin rpy="0 0 0" xyz="-0.060411 -0.003405 -0.048232"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/pan_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </visual>
 
   <collision>
-    <origin rpy="0 0 0" xyz="-0.030411 -0.003402 -0.051732"/>
+    <origin rpy="0 0 0" xyz="-0.060411 -0.003405 -0.048232"/>
     <geometry>
       <mesh filename="package://prm_description/meshes/pan_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -376,7 +376,7 @@
 
 <joint name="rplidar_joint" type="fixed">
   <axis xyz="0 1 0"/>
-  <origin rpy="0 0 0" xyz="-0.121545 -0.068 0.0015"/>
+  <origin rpy="0 0 0" xyz="-0.121545 -0.068 0.0115"/>
   <parent link="plaque_sup_1"/> <!--plaque_sup_1--> 
   <child link="laser_1"/>
 </joint>
@@ -384,7 +384,7 @@
 <!--Joint Tilt-->
 
 <joint name="tilt_joint" type="revolute">
-  <origin rpy="0 0 0" xyz="0.02715 -0.009586 0.030691"/>
+  <origin rpy="0 0 0" xyz="0.02715 -0.009589 0.034291"/>
   <parent link="pan_1"/>
   <child link="tilt_1"/>
   <axis xyz="5.3e-05 -0.01 -9e-06"/>
@@ -414,7 +414,7 @@
 <!--Joint Pan-->
 
 <joint name="pan_joint" type="revolute">
-  <origin rpy="0 0 0" xyz="0.030411 0.003402 0.051732"/>
+  <origin rpy="0 0 0" xyz="0.060411 0.003405 0.048232"/>
   <parent link="base_link"/>
   <child link="pan_1"/>
   <axis xyz="0.0 9e-06 -0.01"/>
