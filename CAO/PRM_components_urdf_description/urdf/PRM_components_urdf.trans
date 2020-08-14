@@ -1,17 +1,6 @@
 <?xml version="1.0" ?>
 <robot name="PRM_components_urdf" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-<transmission name="caster_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="caster">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="caster_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
 <transmission name="rev_left_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="rev_left">
@@ -51,6 +40,17 @@
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
   <actuator name="pan_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="caster_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="caster">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="caster_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
